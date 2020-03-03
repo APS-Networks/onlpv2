@@ -184,7 +184,7 @@ diff -aruN ocp/OpenNetworkLinux/packages/base/any/onlp-snmpd/builds/Makefile sto
 diff -aruN ocp/OpenNetworkLinux/setup.env stordis/OpenNetworkLinux/setup.env
 --- ocp/OpenNetworkLinux/setup.env	2020-03-03 09:23:33.133784893 +0100
 +++ stordis/OpenNetworkLinux/setup.env	2020-03-03 11:27:25.145168841 +0100
-@@ -52,13 +52,23 @@
+@@ -52,10 +52,9 @@
  # submodule post update scripts.
  export ONL_SUBMODULE_UPDATED_SCRIPTS="$ONL/tools/scripts/submodule-updated.sh"
  
@@ -192,29 +192,12 @@ diff -aruN ocp/OpenNetworkLinux/setup.env stordis/OpenNetworkLinux/setup.env
 -x86-64-accton-as7712-32x-r0
 -x86-64-accton-as5812-54x-r0
 -x86-64-inventec-d5254-r0
--x86-64-inventec-d10064-r0
--x86-64-inventec-d10056-r0
 -x86-64-accton-wedge100bf-32x-r0
--x86-64-inventec-d7032q28b-r0
 -x86-64-delta-ag9032v1-r0
 -"
-+#export ONLPM_OPTION_PLATFORM_WHITELIST="\
-+#x86-64-accton-as7712-32x-r0
-+#x86-64-accton-as5812-54x-r0
-+#x86-64-inventec-d5254-r0
-+#x86-64-inventec-d10064-r0
-+#x86-64-inventec-d10056-r0
-+#x86-64-accton-wedge100bf-32x-r0
-+#x86-64-inventec-d7032q28b-r0
-+#x86-64-delta-ag9032v1-r0
-+#x86-64-stordis-bf2556x-1t-r0
-+#"
-+
-+
 +# Used by OpenNetworkLinux/builds/{arch}/rootfs/builds/Makefile
 +export PLATFORM_LIST=x86-64-stordis-bf2556x-1t-r0
 +# Used by OpenNetworkLinux/packages/base/any/initrds/loader/builds/Makefile
 +export PLATFORMS=x86-64-stordis-bf2556x-1t-r0
 +# Used by OpenNetworkLinux/tools/onlpm.py
 +export ONLPM_OPTION_PLATFORM_WHITELIST="x86-64-stordis-bf2556x-1t-r0"
-+
