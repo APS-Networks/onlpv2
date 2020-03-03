@@ -1,0 +1,220 @@
+diff -aruN ocp/OpenNetworkLinux/builds/amd64/installer/installed/builds/boot-config stordis/OpenNetworkLinux/builds/amd64/installer/installed/builds/boot-config
+--- ocp/OpenNetworkLinux/builds/amd64/installer/installed/builds/boot-config	2020-03-03 09:23:32.597787938 +0100
++++ stordis/OpenNetworkLinux/builds/amd64/installer/installed/builds/boot-config	2020-03-03 11:27:24.637170429 +0100
+@@ -1,3 +1,4 @@
+ NETDEV=ma1
+ BOOTMODE=INSTALLED
+ SWI=images::latest
++NETAUTO=dhcp
+diff -aruN ocp/OpenNetworkLinux/builds/any/rootfs/jessie/common/all-base-packages.yml stordis/OpenNetworkLinux/builds/any/rootfs/jessie/common/all-base-packages.yml
+--- ocp/OpenNetworkLinux/builds/any/rootfs/jessie/common/all-base-packages.yml	2020-03-03 09:23:32.597787938 +0100
++++ stordis/OpenNetworkLinux/builds/any/rootfs/jessie/common/all-base-packages.yml	2020-03-03 11:27:24.637170429 +0100
+@@ -78,3 +78,33 @@
+ - strace
+ - sysstat
+ - ipmitool
++- autoconf
++- libtool
++- libc6-dev
++- g++
++- git
++- libboost-dev
++- python-dev
++- flex
++- bison
++- libevent-dev
++- libboost-test-dev
++- bridge-utils
++- python-pip
++- python-ply
++- ethtool
++- libssl-dev
++- libpcap-dev
++- libusb-1.0-0-dev
++- libcurl4-gnutls-dev
++- automake
++- python-crcmod
++- python-jsonschema
++- xz-utils
++- libbz2-dev
++- python3
++- python3-pip
++- python3-dev
++- python3-crcmod
++- python3-jsonschema
++- python3-yaml
+diff -aruN ocp/OpenNetworkLinux/builds/any/rootfs/jessie/common/amd64-base-packages.yml stordis/OpenNetworkLinux/builds/any/rootfs/jessie/common/amd64-base-packages.yml
+--- ocp/OpenNetworkLinux/builds/any/rootfs/jessie/common/amd64-base-packages.yml	2020-03-03 09:23:32.597787938 +0100
++++ stordis/OpenNetworkLinux/builds/any/rootfs/jessie/common/amd64-base-packages.yml	2020-03-03 11:27:24.637170429 +0100
+@@ -10,8 +10,10 @@
+ - onl-upgrade
+ - hw-management
+ - sx-kernel
+-- onl-kernel-3.16-lts-x86-64-all-modules
+-- onl-kernel-4.9-lts-x86-64-all-modules
++#- onl-kernel-3.16-lts-x86-64-all-modules
++#- onl-kernel-3.16-lts-x86-64-all
++#- onl-kernel-4.9-lts-x86-64-all-modules
+ - onl-kernel-4.14-lts-x86-64-all-modules
++- onl-kernel-4.14-lts-x86-64-all
+ - efibootmgr
+ - gdisk
+diff -aruN ocp/OpenNetworkLinux/builds/any/rootfs/stretch/common/all-base-packages.yml stordis/OpenNetworkLinux/builds/any/rootfs/stretch/common/all-base-packages.yml
+--- ocp/OpenNetworkLinux/builds/any/rootfs/stretch/common/all-base-packages.yml	2020-03-03 09:23:32.597787938 +0100
++++ stordis/OpenNetworkLinux/builds/any/rootfs/stretch/common/all-base-packages.yml	2020-03-03 11:27:24.637170429 +0100
+@@ -77,3 +77,50 @@
+ - tcpdump
+ - strace
+ - sysstat
++- autoconf
++- libtool
++- libc6-dev
++- g++
++- git
++- libboost-dev
++- python-dev
++- flex
++- bison
++- libevent-dev
++- libboost-test-dev
++- libboost-thread-dev
++- bridge-utils
++- python-pip
++- python-ply
++- ethtool
++- libssl-dev
++- libpcap-dev
++- libusb-1.0-0-dev
++- libcurl4-gnutls-dev
++- automake
++- python-crcmod
++- python-jsonschema
++- xz-utils
++- libbz2-dev
++- python3
++- python3-pip
++- python3-dev
++- python3-crcmod
++- python3-jsonschema
++- python3-yaml
++- pkg-config
++- curl
++- unzip
++- python-ipaddr
++- python-pyparsing
++- doxygen
++- python-ply
++- python-simplejson
++- python-packaging
++- python-vcversioner
++- python-functools32
++- python-six
++- python-wheel
++- python-futures
++- python-enum34
++- python-coverage
+diff -aruN ocp/OpenNetworkLinux/builds/any/rootfs/stretch/common/amd64-base-packages.yml stordis/OpenNetworkLinux/builds/any/rootfs/stretch/common/amd64-base-packages.yml
+--- ocp/OpenNetworkLinux/builds/any/rootfs/stretch/common/amd64-base-packages.yml	2020-03-03 09:23:32.597787938 +0100
++++ stordis/OpenNetworkLinux/builds/any/rootfs/stretch/common/amd64-base-packages.yml	2020-03-03 11:27:24.637170429 +0100
+@@ -9,7 +9,8 @@
+ - grub2
+ - onl-upgrade
+ - hw-management
+-- onl-kernel-4.9-lts-x86-64-all-modules
++#- onl-kernel-4.9-lts-x86-64-all-modules
+ - onl-kernel-4.14-lts-x86-64-all-modules
++- onl-kernel-4.14-lts-x86-64-all
+ - efibootmgr
+ - gdisk
+diff -aruN ocp/OpenNetworkLinux/packages/base/amd64/upgrade/builds/Makefile stordis/OpenNetworkLinux/packages/base/amd64/upgrade/builds/Makefile
+--- ocp/OpenNetworkLinux/packages/base/amd64/upgrade/builds/Makefile	2020-03-03 09:23:32.613787847 +0100
++++ stordis/OpenNetworkLinux/packages/base/amd64/upgrade/builds/Makefile	2020-03-03 11:27:24.653170379 +0100
+@@ -1,10 +1,11 @@
+ include $(ONL)/make/config.amd64.mk
+ 
+ # All amd64 kernels
+-KERNELS := $(shell $(ONLPM) --find-file onl-kernel-3.16-lts-x86-64-all:amd64 kernel-3.16-lts-x86_64-all) \
+-	   $(shell $(ONLPM) --find-file onl-kernel-4.9-lts-x86-64-all:amd64 kernel-4.9-lts-x86_64-all) \
+-	   $(shell $(ONLPM) --find-file onl-kernel-4.14-lts-x86-64-all:amd64 kernel-4.14-lts-x86_64-all)
++#KERNELS := $(shell $(ONLPM) --find-file onl-kernel-3.16-lts-x86-64-all:amd64 kernel-3.16-lts-x86_64-all) \
++#	   $(shell $(ONLPM) --find-file onl-kernel-4.9-lts-x86-64-all:amd64 kernel-4.9-lts-x86_64-all) \
++#	   $(shell $(ONLPM) --find-file onl-kernel-4.14-lts-x86-64-all:amd64 kernel-4.14-lts-x86_64-all)
+ 
++KERNELS := $(shell $(ONLPM) --find-file onl-kernel-4.14-lts-x86-64-all:amd64 kernel-4.14-lts-x86_64-all)
+ 
+ # Loader initrd
+ INITRD := $(shell $(ONLPM) --find-file onl-loader-initrd:amd64 onl-loader-initrd-amd64.cpio.gz)
+diff -aruN ocp/OpenNetworkLinux/packages/base/amd64/upgrade/PKG.yml stordis/OpenNetworkLinux/packages/base/amd64/upgrade/PKG.yml
+--- ocp/OpenNetworkLinux/packages/base/amd64/upgrade/PKG.yml	2020-03-03 09:23:32.613787847 +0100
++++ stordis/OpenNetworkLinux/packages/base/amd64/upgrade/PKG.yml	2020-03-03 11:27:24.653170379 +0100
+@@ -1,7 +1,7 @@
+ prerequisites:
+     packages:
+-      - onl-kernel-3.16-lts-x86-64-all:amd64
+-      - onl-kernel-4.9-lts-x86-64-all:amd64
++      #- onl-kernel-3.16-lts-x86-64-all:amd64
++      #- onl-kernel-4.9-lts-x86-64-all:amd64
+       - onl-kernel-4.14-lts-x86-64-all:amd64
+       - onl-loader-initrd:amd64
+ 
+diff -aruN ocp/OpenNetworkLinux/packages/base/any/kernels/3.16-lts/patches/driver-igb-version-5.3.54.patch stordis/OpenNetworkLinux/packages/base/any/kernels/3.16-lts/patches/driver-igb-version-5.3.54.patch
+--- ocp/OpenNetworkLinux/packages/base/any/kernels/3.16-lts/patches/driver-igb-version-5.3.54.patch	2020-03-03 09:23:32.629787757 +0100
++++ stordis/OpenNetworkLinux/packages/base/any/kernels/3.16-lts/patches/driver-igb-version-5.3.54.patch	2020-03-03 11:27:24.669170329 +0100
+@@ -43286,7 +43286,7 @@
+ +#endif
+ +
+ +#ifndef AX_RELEASE_CODE
+-+#define AX_RELEASE_CODE 0
+++#define AX_RELEASE_CODE AX_RELEASE_VERSION(3,0)
+ +#endif
+ +
+ +#if (AX_RELEASE_CODE && AX_RELEASE_CODE == AX_RELEASE_VERSION(3,0))
+diff -aruN ocp/OpenNetworkLinux/packages/base/any/onlp-snmpd/builds/Makefile stordis/OpenNetworkLinux/packages/base/any/onlp-snmpd/builds/Makefile
+--- ocp/OpenNetworkLinux/packages/base/any/onlp-snmpd/builds/Makefile	2020-03-03 09:23:32.897786233 +0100
++++ stordis/OpenNetworkLinux/packages/base/any/onlp-snmpd/builds/Makefile	2020-03-03 11:27:24.925169528 +0100
+@@ -26,7 +26,7 @@
+ 
+ LIBONLP := $(shell $(ONLPM) --find-file onlp:$(ARCH) libonlp.so)
+ 
+-GLOBAL_LINK_LIBS += -lpthread $(LIBONLP)
++GLOBAL_LINK_LIBS += -lm -lpthread $(LIBONLP)
+ GLOBAL_LINK_LIBS += -Wl,--unresolved-symbols=ignore-in-shared-libs
+ 
+ .DEFAULT_GOAL := onlp-snmpd
+diff -aruN ocp/OpenNetworkLinux/setup.env stordis/OpenNetworkLinux/setup.env
+--- ocp/OpenNetworkLinux/setup.env	2020-03-03 09:23:33.133784893 +0100
++++ stordis/OpenNetworkLinux/setup.env	2020-03-03 11:27:25.145168841 +0100
+@@ -52,13 +52,23 @@
+ # submodule post update scripts.
+ export ONL_SUBMODULE_UPDATED_SCRIPTS="$ONL/tools/scripts/submodule-updated.sh"
+ 
+-export ONLPM_OPTION_PLATFORM_WHITELIST="\
+-x86-64-accton-as7712-32x-r0
+-x86-64-accton-as5812-54x-r0
+-x86-64-inventec-d5254-r0
+-x86-64-inventec-d10064-r0
+-x86-64-inventec-d10056-r0
+-x86-64-accton-wedge100bf-32x-r0
+-x86-64-inventec-d7032q28b-r0
+-x86-64-delta-ag9032v1-r0
+-"
++#export ONLPM_OPTION_PLATFORM_WHITELIST="\
++#x86-64-accton-as7712-32x-r0
++#x86-64-accton-as5812-54x-r0
++#x86-64-inventec-d5254-r0
++#x86-64-inventec-d10064-r0
++#x86-64-inventec-d10056-r0
++#x86-64-accton-wedge100bf-32x-r0
++#x86-64-inventec-d7032q28b-r0
++#x86-64-delta-ag9032v1-r0
++#x86-64-stordis-bf2556x-1t-r0
++#"
++
++
++# Used by OpenNetworkLinux/builds/{arch}/rootfs/builds/Makefile
++export PLATFORM_LIST=x86-64-stordis-bf2556x-1t-r0
++# Used by OpenNetworkLinux/packages/base/any/initrds/loader/builds/Makefile
++export PLATFORMS=x86-64-stordis-bf2556x-1t-r0
++# Used by OpenNetworkLinux/tools/onlpm.py
++export ONLPM_OPTION_PLATFORM_WHITELIST="x86-64-stordis-bf2556x-1t-r0"
++
