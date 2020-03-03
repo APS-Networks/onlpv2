@@ -1,10 +1,13 @@
 #! /bin/sh
-git clone https://github.com/opencomputeproject/OpenNetworkLinux.git -b ONLPv2
+git clone https://github.com/opencomputeproject/OpenNetworkLinux.git
 cd OpenNetworkLinux
-#Best working hash of ONLv2 branch
-git checkout d9730e34670429302377d277b429c3a0582ccdd4
-patch -p2 < ../stordis_onlpv2.patch
+#Uncomment one of the commits to build
+#commit=ONLPv2
+#Best working version
+commit=d9730e34670429302377d277b429c3a0582ccdd4
+git checkout $commit
+patch -p2 < ../"$commit.patch"
 cp -r ../stordis ./packages/platforms/
-#Debian version
-export VERSION=9
+#Debian version, 8 or 9
+#export VERSION=9
 make docker
