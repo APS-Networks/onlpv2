@@ -9,5 +9,5 @@ git checkout $commit
 patch -p2 < ../"$commit.patch"
 cp -r ../stordis ./packages/platforms/
 #Debian version, 8 or 9
-#export VERSION=9
+export VERSION=9
 make docker
