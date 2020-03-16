@@ -10,3 +10,5 @@ login to switch
 onie-nos install <image name>
 ####Post install
 ln -s /usr/share/onl/packages/amd64/onl-kernel-4.14-lts-x86-64-all/mbuilds/ /lib/modules/4.14.49-OpenNetworkLinux/build
+  //for building of irq drivers
+ln -s /usr/share/onl/packages/amd64/onl-kernel-4.14-lts-x86-64-all/mbuilds/ /usr/src/linux-headers-4.14.49-OpenNetworkLinux
