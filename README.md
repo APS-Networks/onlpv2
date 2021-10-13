@@ -2,13 +2,13 @@
 
 ## Recommendation  
 
-Recommended is to use debian 8 which compiles stordis package with kernel-3.16.
+Recommended is to use debian 8 which compiles apsn package with kernel-3.16.
 ONL support file from BF to be used Deb8.d91e20140ef9efe7a54a79439c4c205472a69841.tar , No need to apply patch provided that ia already catered in the .patch file available in this repository.
 Hence latest SDE-9.0 can be used.
 
 ## To build
 
-cd stordis_onlpv2  
+cd onlpv2  
 ./build.sh  
 
 ### Then execute following steps afterwards, change debian version 8 (recommended) or 9 in below command  

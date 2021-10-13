@@ -20,7 +20,7 @@ cd OpenNetworkLinux
 commit=d9730e34670429302377d277b429c3a0582ccdd4
 git checkout $commit
 patch -p2 < ../"$commit.patch"
-cp -r ../stordis ./packages/platforms/
+cp -r ../apsn ./packages/platforms/
 #Debian version, 8 or 9
 #export VERSION=8
 #make docker
